@@ -16,7 +16,7 @@ class BooksList extends Component {
                             <img src="../../assests/book-flat.png" width="120px" className="media-object" />
                         </span>
                         <div className="media-body">
-                            <Link to={`/details/${book.id}`}>
+                            <Link to={`/book/${book.id}`}>
                                 {book.title}
                             </Link>
                             <p className="mb-1">{book.description}</p>
@@ -31,6 +31,7 @@ class BooksList extends Component {
     render() {
         return (
             <div>
+                {this.props.books.length}
                 {this.renderBooks()}
             </div>
 

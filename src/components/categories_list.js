@@ -11,7 +11,7 @@ class CategoriesList extends Component {
             if (category.name) {
                 return (
                     <li key={category.id} className="list-group-item">
-                        <Link to={`/details/${category.id}`}>
+                        <Link to={`/category/${category.id}`}>
                             {category.name}
                         </Link>
                     </li>
