@@ -11,7 +11,7 @@ class AuthorsList extends Component {
             if (author.name) {
                 return (
                     <li key={author.id} className="list-group-item">
-                        <Link to={`/details/${author.id}`}>
+                        <Link to={`/author/${author.id}`}>
                             {author.name}
                         </Link>
                     </li>

@@ -1,0 +1,9 @@
+.card-title {
+    font-weight: bold;
+    font-size: 19px;
+    margin-bottom: 23px;
+}
+
+.card .card-img-left {
+    float: right;
+}
