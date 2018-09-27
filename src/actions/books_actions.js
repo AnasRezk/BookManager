@@ -1,8 +1,13 @@
 import axios from 'axios';
-import { FETCH_BOOKS, FETCH_SINGLE_BOOK } from "./book_types";
+import { FETCH_BOOKS, FETCH_SINGLE_BOOK, CREATE_BOOK, INIT_BOOK, UPDATE_BOOK } from "./book_types";
 
 const rootUrl = 'http://localhost:3000/books';
 
+export function initBook() {
+    return {
+        type: INIT_BOOK
+    }
+}
 
 export function fetchBooks() {
     const url = `${rootUrl}`;
@@ -48,4 +53,30 @@ export function fetchCategoryBooks(categoryId) {
         payload: request
     }
 }
+
+export function createBook(values) {
+    debugger
+    const request = axios.post(`${rootUrl}`, values);
+
+    return {
+        type: CREATE_BOOK,
+        payload: request
+    }
+}
+
+export function updateBook(values) {
+    debugger
+    const url = `${rootUrl}/${values.id}`;
+
+    const request = axios.put(url, values);
+
+    return {
+        type: UPDATE_BOOK,
+        payload: request
+    }
+}
+
+
+
+
 

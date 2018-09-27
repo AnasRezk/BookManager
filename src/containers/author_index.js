@@ -26,8 +26,8 @@ class AuthorIndex extends Component {
     return (
       <div>
         Author
-        <AuthorDetail author={this.props.author} />
-        <BookList books={this.props.books} />
+        <AuthorDetail author={this.props.author} editMode={this.props.layout.editMode} />
+        <BookList books={this.props.books} editMode={this.props.layout.editMode} />
       </div>
     );
   }
@@ -36,7 +36,8 @@ class AuthorIndex extends Component {
 function mapStateToProps(state) {
   return {
     books: state.books.all,
-    author: state.authors.author
+    author: state.authors.author,
+    layout: state.layout
   };
 }
 

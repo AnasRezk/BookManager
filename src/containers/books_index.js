@@ -12,19 +12,23 @@ class BooksIndex extends Component {
     }
 
     render() {
-        return (<BookList books={this.props.books} />);
+        return (<BookList books={this.props.books} editMode={this.props.layout.editMode} />);
     }
 }
 
 
 function mapStateToProps(state) {
     return {
-        books: state.books.all
+        books: state.books.all,
+        layout: state.layout
     }
 }
 
 function mapDispatchToPorops(dispatch) {
-    return bindActionCreators({ fetchBooks: fetchBooks }, dispatch);
+    return bindActionCreators(
+        {
+            fetchBooks: fetchBooks
+        }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToPorops)(BooksIndex);

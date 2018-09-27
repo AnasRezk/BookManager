@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import { fetchSingleBook } from "../actions/books_actions";
 import { fetchSingleAuthor } from "../actions/authors_actions";
 import { fetchSingleCategory } from "../actions/categories_actions";
+import { Link } from 'react-router-dom';
 
 
 class BookDetail extends Component {
@@ -13,38 +14,50 @@ class BookDetail extends Component {
         this.props.fetchSingleBook(id);
     }
 
+    renderEditButton(id) {
+        if (this.props.layout.editMode) {
+            return (
+                <Link to={`/editbook/${id}`}>
+                    <button className="btn btn-primary btn-sm"><i className=""></i>edit</button>
+                </Link>
+            );
+        }
+    }
+
     renderBook() {
+        const { id, author, category, title, name, pagesNumber, publishYear, isbn, description } = this.props.book;
         if (this.props.book) {
-            this.props.fetchSingleAuthor(this.props.book.author);
-            this.props.fetchSingleCategory(this.props.book.category);
+            this.props.fetchSingleAuthor(author);
+            this.props.fetchSingleCategory(category);
             return (
                 <div className="card">
                     <img src="../../assests/book-flat.png" width="120px" className="card-img-left" />
                     <div className="card-body">
                         <h5 className="card-title">
-                            {this.props.book.title}
+                            {title}
                         </h5>
+                        {this.renderEditButton(id)}
                         <h6 className="card-subtitle mb-2">
                             <strong>By : </strong>
-                            {this.props.author.name}
+                            {name}
                         </h6>
                         <h6 className="card-subtitle mb-2">
                             <strong>Number of Pages : </strong>
-                            {this.props.book.pagesNumber}
+                            {pagesNumber}
                         </h6>
                         <h6 className="card-subtitle mb-2">
                             <strong>Publish Year : </strong>
-                            {this.props.book.publishYear}
+                            {publishYear}
                         </h6>
                         <h6 className="card-subtitle mb-2">
                             <strong>ISBN : </strong>
-                            {this.props.book.isbn}
+                            {isbn}
                         </h6>
                         <h6 className="card-subtitle mb-2">
                             <strong>Classification : </strong>
                             {this.props.category.name}
                         </h6>
-                        <p className="card-text">{this.props.book.description}.</p>
+                        <p className="card-text">{description}.</p>
                     </div>
                 </div>
             )
@@ -66,7 +79,8 @@ function mapStateToProps(state) {
     return {
         book: state.books.book,
         author: state.authors.author,
-        category: state.categories.category
+        category: state.categories.category,
+        layout: state.layout
     }
 }
 

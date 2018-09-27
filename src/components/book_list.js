@@ -3,6 +3,15 @@ import { Link } from 'react-router-dom';
 
 class BooksList extends Component {
 
+    renderEditButton(book) {
+        if (this.props.editMode) {
+            return (
+                <Link to={`/editbook/${book.id}`}>
+                    <button className="btn btn-primary btn-sm"><i className=""></i>edit</button>
+                </Link>
+            );
+        }
+    }
 
     renderBooks() {
         if (this.props.books.length === 0) {
@@ -19,7 +28,8 @@ class BooksList extends Component {
                             <Link to={`/book/${book.id}`}>
                                 {book.title}
                             </Link>
-                            <p className="mb-1">{book.description}</p>
+                            {this.renderEditButton(book)}
+                            <p>{book.description}</p>
                             <small>{book.categories}</small>
                         </div>
                     </li>

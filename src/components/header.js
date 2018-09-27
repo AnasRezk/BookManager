@@ -4,8 +4,11 @@ import { Link } from "react-router-dom";
 export class Header extends Component {
 
     render() {
+        const headerStyle = this.props.editMode ? { backgroundColor: "#923838", borderColor: "#923838" } : {};
+        const editBtntext = this.props.editMode ? 'exit edit mode' : 'Edit Mode';
+        const editBtnClass = this.props.editMode ? 'btn btn-success' : 'btn btn-danger';
         return (
-            <nav className="navbar navbar-inverse">
+            <nav className="navbar navbar-inverse" style={headerStyle}>
                 <div className="container-fluid">
                     <div className="navbar-header">
                         <Link to="/" className="navbar-brand">
@@ -14,29 +17,33 @@ export class Header extends Component {
                     </div>
                     <ul className="nav navbar-nav navbar-right">
                         <li>
-                            <Link to="/anas">
+                            <Link to="/newbook">
                                 <button className="btn btn-primary">New Book</button>
                             </Link>
                         </li>
                         <li>
-                            <Link to="/managePost">
-                                <button className="btn btn-primary">New Auther</button>
+                            <Link to="/newAuthor">
+                                <button className="btn btn-primary">New Author</button>
                             </Link>
                         </li>
                         <li>
-                            <Link to="/managePost">
+                            <Link to="/NewCategory">
                                 <button className="btn btn-primary">New Category</button>
                             </Link>
                         </li>
-                        <li>
-                            <Link to="/managePost">
-                                <button className="btn btn-danger">Edit Mode</button>
-                            </Link>
+                        <li className="nav-btn">
+                            <a>
+                                <button onClick={() => this.onButtonClicked()} className={editBtnClass}>{editBtntext}</button>
+                            </a>
                         </li>
                     </ul>
                 </div>
             </nav>
         );
+    }
+
+    onButtonClicked = () => {
+        this.props.onEditButtonClicked();
     }
 }
 

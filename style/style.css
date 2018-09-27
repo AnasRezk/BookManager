@@ -7,3 +7,7 @@
 .card .card-img-left {
     float: right;
 }
+
+.navbar-header .navbar-brand {
+    color: #ffffff;
+}
