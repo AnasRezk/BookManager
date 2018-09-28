@@ -55,7 +55,6 @@ export function fetchCategoryBooks(categoryId) {
 }
 
 export function createBook(values) {
-    debugger
     const request = axios.post(`${rootUrl}`, values);
 
     return {
@@ -65,7 +64,6 @@ export function createBook(values) {
 }
 
 export function updateBook(values) {
-    debugger
     const url = `${rootUrl}/${values.id}`;
 
     const request = axios.put(url, values);

@@ -22,12 +22,12 @@ export class Header extends Component {
                             </Link>
                         </li>
                         <li>
-                            <Link to="/newAuthor">
+                            <Link to="/newauthor">
                                 <button className="btn btn-primary">New Author</button>
                             </Link>
                         </li>
                         <li>
-                            <Link to="/NewCategory">
+                            <Link to="/newcategory">
                                 <button className="btn btn-primary">New Category</button>
                             </Link>
                         </li>

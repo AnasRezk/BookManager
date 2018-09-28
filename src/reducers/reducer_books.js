@@ -1,4 +1,4 @@
-import { FETCH_BOOKS, FETCH_SINGLE_BOOK, INIT_BOOK, CREATE_BOOK } from "../actions/book_types";
+import { FETCH_BOOKS, FETCH_SINGLE_BOOK, INIT_BOOK, CREATE_BOOK, UPDATE_BOOK } from "../actions/book_types";
 
 const INITIAL_STATE = {
     all: [],
@@ -24,7 +24,22 @@ export default function (state = INITIAL_STATE, action) {
         case FETCH_SINGLE_BOOK:
             return { ...state, book: action.payload.data };
         case CREATE_BOOK:
-            return { ...state, post: null, all: [action.payload.data, ...state] };
+            return { ...state, book: null, all: [action.payload.data, ...state.all] };
+        case UPDATE_BOOK:
+            {
+                const index = state
+                    .all
+                    .findIndex(h => h.id === state.book.id);
+                if (index >= 0) {
+                    const all = [
+                        ...state.all.slice(0, index),
+                        action.payload.data,
+                        ...state.all.slice(index + 1)
+                    ];
+                    return { ...state, all };
+                }
+                return state;
+            }
         default:
             return state
     }

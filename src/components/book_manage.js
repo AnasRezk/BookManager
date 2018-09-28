@@ -5,36 +5,12 @@ import { setEditMode } from "../actions/layout_actions";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-
-// Define stateless component to render input and errors
-const renderInput = field => {
-    return (
-        <div className={field.meta.touched && field.meta.invalid ? 'has-danger' : ''}>
-            <input {...field.input} type={field.type} className="form-control" />
-            {field.meta.touched &&
-                field.meta.error &&
-                <span className="error">{field.meta.error}</span>}
-        </div>
-    );
-};
-
-const renderTextArea = field => {
-    return (
-        <div>
-            <textarea {...field.input} type={field.type} className="form-control" />
-            {field.meta.touched &&
-                field.meta.error &&
-                <span className="error">{field.meta.error}</span>}
-        </div>
-    );
-};
+import { renderInput, renderTextArea } from '../components/core/ui_helpers'
 
 const validate = values => {
     const errors = {};
     if (!values.title) {
         errors.title = 'Required'
-    } else if (!values.categories) {
-        errors.categories = 'Required'
     }
     return errors
 };
@@ -83,7 +59,7 @@ class BookManage extends Component {
         return (
             <div>
                 <button onClick={this.goBack} className="btn btn-xs btn-default">Back</button>
-                <h3>Manage Post</h3>
+                <h3>Manage Book</h3>
                 <form onSubmit={handleSubmit(this.onFormSubmit)}>
 
                     <div className="form-group">
@@ -193,7 +169,7 @@ function mapDispatchToProps(dispatch) {
 
 // Decorate with reduxForm(). It will read the initialValues prop provided by connect()
 BookManage = reduxForm({
-    form: 'PostForm', // a unique identifier for this form
+    form: 'BookForm', // a unique identifier for this form
     validate,
     enableReinitialize: true
 })(BookManage);

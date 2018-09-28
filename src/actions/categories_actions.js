@@ -1,7 +1,13 @@
 import axios from 'axios';
-import { FETCH_CATEGORIES, FETCH_SINGLE_CATEGORY } from "./categories_types";
+import { FETCH_CATEGORIES, FETCH_SINGLE_CATEGORY, CREATE_CATEGORY, UPDATE_CATEGORY, INIT_CATEGORY } from "./categories_types";
 
 const rootUrl = 'http://localhost:3000/categories';
+
+export function initCategory() {
+    return {
+        type: INIT_CATEGORY
+    }
+}
 
 export function fetchCategories() {
     const url = `${rootUrl}`;
@@ -21,6 +27,26 @@ export function fetchSingleCategory(id) {
 
     return {
         type: FETCH_SINGLE_CATEGORY,
+        payload: request
+    }
+}
+
+export function createCategory(values) {
+    const request = axios.post(`${rootUrl}`, values);
+
+    return {
+        type: CREATE_CATEGORY,
+        payload: request
+    }
+}
+
+export function updateCategory(values) {
+    const url = `${rootUrl}/${values.id}`;
+
+    const request = axios.put(url, values);
+
+    return {
+        type: UPDATE_CATEGORY,
         payload: request
     }
 }
