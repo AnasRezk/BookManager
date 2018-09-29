@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { renderInput, renderTextArea } from "../components/core/ui_helpers";
 import { required } from "../utils/validations";
+import { v4 } from "uuid";
 
 const validate = values => {
   const errors = {};
@@ -51,6 +52,7 @@ class AuthorManage extends Component {
         this.props.history.push("/");
       });
     } else {
+      values.id = v4();
       this.props.createAuthor(values).then(() => {
         this.props.initAuthor();
       });

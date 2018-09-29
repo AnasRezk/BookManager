@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { renderInput } from "./core/ui_helpers";
 import { required } from "../utils/validations";
+import { v4 } from "uuid";
 
 class CategoryManage extends Component {
   componentWillMount() {
@@ -43,6 +44,7 @@ class CategoryManage extends Component {
         this.props.history.push("/");
       });
     } else {
+      values.id = v4();
       this.props.createCategory(values).then(() => {
         this.props.initCategory();
       });

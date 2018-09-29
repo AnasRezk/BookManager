@@ -17,6 +17,7 @@ import {
 } from "../components/core/ui_helpers";
 import { normalizeInt } from "../utils/normalizeInt";
 import { required } from "../utils/validations";
+import { v4 } from "uuid";
 
 class BookManage extends Component {
   componentWillMount() {
@@ -48,6 +49,7 @@ class BookManage extends Component {
         this.props.history.push("/");
       });
     } else {
+      values.id = v4();
       this.props.createBook(values).then(() => {
         this.props.initBook();
       });
