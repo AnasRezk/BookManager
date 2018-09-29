@@ -10,16 +10,13 @@ import { setEditMode } from "../actions/layout_actions";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { renderInput, renderTextArea } from "../components/core/ui_helpers";
-import { validateNumber } from "../utils/validation";
-
-const validate = values => {
-  const errors = {};
-  if (!values.title) {
-    errors.title = "Required";
-  }
-  return errors;
-};
+import {
+  renderInput,
+  renderTextArea,
+  renderSelect
+} from "../components/core/ui_helpers";
+import { normalizeInt } from "../utils/normalizeInt";
+import { required } from "../utils/validations";
 
 class BookManage extends Component {
   componentWillMount() {
@@ -69,31 +66,36 @@ class BookManage extends Component {
         <form onSubmit={handleSubmit(this.onFormSubmit)}>
           <div className="form-group">
             <label htmlFor="title">title</label>
-            <Field name="title" component={renderInput} type="text" />
+            <Field
+              name="title"
+              component={renderInput}
+              type="text"
+              validate={[required]}
+            />
           </div>
 
           <div className="form-group">
             <label htmlFor="category">Category</label>
-            <Field name="category" component="select" className="form-control">
-              <option value="">Select a author...</option>
-              {this.props.categories.map(category => (
-                <option value={category.id} key={category.id}>
-                  {category.name}
-                </option>
-              ))}
-            </Field>
+            <Field
+              name="category"
+              placeholder="Select a Category..."
+              component={field =>
+                renderSelect(field, this.props.categories, "id", "name")
+              }
+              validate={[required]}
+            />
           </div>
 
           <div className="form-group">
             <label htmlFor="author">Author</label>
-            <Field name="author" component="select" className="form-control">
-              <option value="">Select a category...</option>
-              {this.props.authors.map(author => (
-                <option value={author.id} key={author.id}>
-                  {author.name}
-                </option>
-              ))}
-            </Field>
+            <Field
+              name="author"
+              placeholder="Select an Author..."
+              component={field =>
+                renderSelect(field, this.props.authors, "id", "name")
+              }
+              validate={[required]}
+            />
           </div>
 
           <div className="form-group">
@@ -108,12 +110,25 @@ class BookManage extends Component {
 
           <div className="form-group">
             <label htmlFor="pagesNumber">No. of Pages</label>
-            <Field name="pagesNumber" component={renderInput} type="text" />
+            <Field
+              validate={[required]}
+              name="pagesNumber"
+              component={renderInput}
+              type="text"
+              placeholder="No. of Pages"
+              normalize={value => normalizeInt(value, null)}
+            />
           </div>
 
           <div className="form-group">
             <label htmlFor="publishYear">Publish Year</label>
-            <Field name="publishYear" component={renderInput} type="text" />
+            <Field
+              name="publishYear"
+              component={renderInput}
+              placeholder="Publish Year"
+              normalize={value => normalizeInt(value, 4)}
+              type="text"
+            />
           </div>
 
           <div className="form-group">
@@ -167,7 +182,6 @@ function mapDispatchToProps(dispatch) {
 // Decorate with reduxForm(). It will read the initialValues prop provided by connect()
 BookManage = reduxForm({
   form: "BookForm", // a unique identifier for this form
-  validate,
   enableReinitialize: true
 })(BookManage);
 

@@ -11,3 +11,8 @@
 .navbar-header .navbar-brand {
     color: #ffffff;
 }
+
+
+.error {
+    color: red;
+}

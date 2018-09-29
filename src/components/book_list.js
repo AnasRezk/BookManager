@@ -17,7 +17,6 @@ class BooksList extends Component {
   }
 
   renderPagenation() {
-    debugger;
     if (this.props.pageCount > 1) {
       return (
         <ReactPaginate
