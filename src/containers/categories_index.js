@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { fetchSingleCategory } from "../actions/categories_actions";
-import { fetchCategoryBooks } from "../actions/books_actions";
+import { fetchCategoryBooks, initBook } from "../actions/books_actions";
 import BookList from "../components/book_list";
 import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -18,6 +18,7 @@ class AuthorIndex extends Component {
   componentDidUpdate(prevProps) {
     this.categoryId = this.props.match.params.id;
     if (this.categoryId !== prevProps.category.id) {
+      this.props.initBook();
       this.props.fetchCategoryBooks(this.categoryId, 1, this.props.perPage);
       this.props.fetchSingleCategory(this.categoryId);
     }
@@ -55,6 +56,7 @@ class AuthorIndex extends Component {
           books={this.props.books}
           perPage={this.props.perPage}
           pageCount={this.props.pageCount}
+          loaded={this.props.loaded}
           editMode={this.props.layout.editMode}
         />
       </div>
@@ -68,6 +70,7 @@ function mapStateToProps(state) {
     category: state.categories.category,
     perPage: state.books.perPage,
     pageCount: state.books.pageCount,
+    loaded: state.books.loaded,
     layout: state.layout
   };
 }
@@ -76,7 +79,8 @@ function mapDispatchToPorops(dispatch) {
   return bindActionCreators(
     {
       fetchCategoryBooks: fetchCategoryBooks,
-      fetchSingleCategory: fetchSingleCategory
+      fetchSingleCategory: fetchSingleCategory,
+      initBook: initBook
     },
     dispatch
   );

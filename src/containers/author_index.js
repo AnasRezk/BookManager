@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { fetchAuthorBooks } from "../actions/books_actions";
+import { fetchAuthorBooks, initBook } from "../actions/books_actions";
 import { fetchSingleAuthor } from "../actions/authors_actions";
 import BookList from "../components/book_list";
 import AuthorDetail from "../components/author_detail";
@@ -18,6 +18,7 @@ class AuthorIndex extends Component {
   componentDidUpdate(prevProps) {
     this.authorId = this.props.match.params.id;
     if (this.authorId !== prevProps.author.id) {
+      this.props.initBook();
       this.props.fetchAuthorBooks(this.authorId, 1, this.props.perPage);
       this.props.fetchSingleAuthor(this.authorId);
     }
@@ -40,6 +41,7 @@ class AuthorIndex extends Component {
           books={this.props.books}
           perPage={this.props.perPage}
           pageCount={this.props.pageCount}
+          loaded={this.props.loaded}
           editMode={this.props.layout.editMode}
         />
       </div>
@@ -53,6 +55,7 @@ function mapStateToProps(state) {
     author: state.authors.author,
     perPage: state.books.perPage,
     pageCount: state.books.pageCount,
+    loaded: state.books.loaded,
     layout: state.layout
   };
 }
@@ -61,7 +64,8 @@ function mapDispatchToPorops(dispatch) {
   return bindActionCreators(
     {
       fetchAuthorBooks: fetchAuthorBooks,
-      fetchSingleAuthor: fetchSingleAuthor
+      fetchSingleAuthor: fetchSingleAuthor,
+      initBook: initBook
     },
     dispatch
   );

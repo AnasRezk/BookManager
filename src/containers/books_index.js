@@ -20,6 +20,7 @@ class BooksIndex extends Component {
         books={this.props.books}
         perPage={this.props.perPage}
         pageCount={this.props.pageCount}
+        loaded={this.props.loaded}
         editMode={this.props.layout.editMode}
       />
     );
@@ -31,6 +32,7 @@ function mapStateToProps(state) {
     books: state.books.all,
     perPage: state.books.perPage,
     pageCount: state.books.pageCount,
+    loaded: state.books.loaded,
     layout: state.layout
   };
 }

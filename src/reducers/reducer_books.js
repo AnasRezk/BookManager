@@ -10,6 +10,7 @@ const INITIAL_STATE = {
   all: [],
   pageCount: 0,
   perPage: 10,
+  loaded: false,
   book: {
     id: "",
     title: "",
@@ -31,6 +32,7 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         all: action.payload.data,
+        loaded: true,
         pageCount: Math.ceil(
           action.payload.headers["x-total-count"] / state.perPage
         )

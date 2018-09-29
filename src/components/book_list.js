@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
+import Loader from "../utils/loader";
 
 class BooksList extends Component {
   renderEditButton(book) {
@@ -37,9 +38,17 @@ class BooksList extends Component {
   }
 
   renderBooks() {
-    if (this.props.books.length === 0) {
-      return <div>loading....</div>;
+    if (!this.props.loaded) {
+      return <Loader />;
     }
+    if (this.props.loaded && this.props.books.length === 0) {
+      return (
+        <div className="alert alert-info" role="alert">
+          <strong>Heads up!</strong> There is no books.
+        </div>
+      );
+    }
+
     return this.props.books.map(book => {
       if (book.title) {
         return (
