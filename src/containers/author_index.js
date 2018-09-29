@@ -8,26 +8,40 @@ import AuthorDetail from "../components/author_detail";
 import { withRouter } from "react-router-dom";
 
 class AuthorIndex extends Component {
+  authorId = null;
   componentWillMount() {
-    const authorId = this.props.match.params.id;
-    this.props.fetchAuthorBooks(authorId);
-    this.props.fetchSingleAuthor(authorId);
+    this.authorId = this.props.match.params.id;
+    this.props.fetchAuthorBooks(this.authorId, 1, this.props.perPage);
+    this.props.fetchSingleAuthor(this.authorId);
   }
 
   componentDidUpdate(prevProps) {
-    const authorId = this.props.match.params.id;
-    if (authorId !== prevProps.author.id) {
-      this.props.fetchAuthorBooks(authorId);
-      this.props.fetchSingleAuthor(authorId);
+    this.authorId = this.props.match.params.id;
+    if (this.authorId !== prevProps.author.id) {
+      this.props.fetchAuthorBooks(this.authorId, 1, this.props.perPage);
+      this.props.fetchSingleAuthor(this.authorId);
     }
   }
 
   render() {
+    const detectPageClicked = offset => {
+      this.props.fetchBooks(this.authorId, offset, this.props.perPage);
+    };
+
     return (
       <div>
         Author
-        <AuthorDetail author={this.props.author} editMode={this.props.layout.editMode} />
-        <BookList books={this.props.books} editMode={this.props.layout.editMode} />
+        <AuthorDetail
+          author={this.props.author}
+          editMode={this.props.layout.editMode}
+        />
+        <BookList
+          onPageClicked={detectPageClicked}
+          books={this.props.books}
+          perPage={this.props.perPage}
+          pageCount={this.props.pageCount}
+          editMode={this.props.layout.editMode}
+        />
       </div>
     );
   }
@@ -37,6 +51,8 @@ function mapStateToProps(state) {
   return {
     books: state.books.all,
     author: state.authors.author,
+    perPage: state.books.perPage,
+    pageCount: state.books.pageCount,
     layout: state.layout
   };
 }
