@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { fetchSingleCategory } from "../actions/categories_actions";
-import { fetchCategoryBooks, initBook } from "../actions/books_actions";
+import {
+  fetchSingleCategory,
+  initCategory
+} from "../actions/categories_actions";
+import { fetchCategoryBooks, initAllBook } from "../actions/books_actions";
 import BookList from "../components/book_list";
 import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-class AuthorIndex extends Component {
+class CategoriesIndex extends Component {
   getId() {
     return this.props.match.params.id;
   }
@@ -18,10 +21,13 @@ class AuthorIndex extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.getId() !== prevProps.category.id) {
-      this.props.initBook();
-      this.props.fetchCategoryBooks(this.getId(), 1, this.props.perPage);
-      this.props.fetchSingleCategory(this.getId());
+    const prevId = prevProps.match.params.id;
+    const nextId = this.getId();
+    if (nextId !== prevId) {
+      this.props.initAllBook();
+      this.props.initCategory();
+      this.props.fetchCategoryBooks(nextId, 1, this.props.perPage);
+      this.props.fetchSingleCategory(nextId);
     }
   }
 
@@ -46,7 +52,11 @@ class AuthorIndex extends Component {
     const { id, name } = this.props.category;
     return (
       <div>
-        <h2>{name}</h2>
+        <div className="panel panel-default">
+          <div className="panel-body">
+            <strong>{name}</strong>
+          </div>
+        </div>
         {this.renderEditButton(id)}
         <BookList
           onPageClicked={detectPageClicked}
@@ -77,7 +87,8 @@ function mapDispatchToPorops(dispatch) {
     {
       fetchCategoryBooks: fetchCategoryBooks,
       fetchSingleCategory: fetchSingleCategory,
-      initBook: initBook
+      initAllBook: initAllBook,
+      initCategory: initCategory
     },
     dispatch
   );
@@ -87,5 +98,5 @@ export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToPorops
-  )(AuthorIndex)
+  )(CategoriesIndex)
 );

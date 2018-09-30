@@ -80,7 +80,6 @@ class BooksList extends Component {
   render() {
     return (
       <div>
-        {this.props.books.length}
         {this.renderBooks()}
         {this.renderPagenation()}
       </div>

@@ -56,7 +56,7 @@ function mapStateToProps(state) {
     categories: state.categories.all,
     authors: state.authors.all,
     authorLoaded: state.authors.loaded,
-    categoryLoaded: state.authors.loaded,
+    categoryLoaded: state.categories.loaded,
     layout: state.layout
   };
 }

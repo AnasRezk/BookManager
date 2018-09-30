@@ -11,7 +11,9 @@ class CategoriesList extends Component {
       if (category.name) {
         return (
           <li key={category.id} className="list-group-item">
-            <Link to={`/category/${category.id}`}>{category.name}</Link>
+            <Link to={`/category/${category.id}`}>
+              {category.name} {this.props.selectedCategoryId}
+            </Link>
           </li>
         );
       }
@@ -20,10 +22,10 @@ class CategoriesList extends Component {
 
   render() {
     return (
-      <div>
-        <h5>Categories</h5>
+      <ul className="list-group">
+        <li className="list-group-item li__head">Categories</li>
         {this.renderCategories()}
-      </div>
+      </ul>
     );
   }
 }

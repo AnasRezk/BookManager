@@ -8,9 +8,9 @@ import {
 
 const INITIAL_STATE = {
   all: [],
+  loaded: false,
   category: {
     id: "",
-    loaded: false,
     name: ""
   }
 };

@@ -3,7 +3,8 @@ import {
   FETCH_SINGLE_BOOK,
   INIT_BOOK,
   CREATE_BOOK,
-  UPDATE_BOOK
+  UPDATE_BOOK,
+  INIT_ALL_BOOKS
 } from "../actions/book_types";
 
 const INITIAL_STATE = {
@@ -28,6 +29,8 @@ export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
     case INIT_BOOK:
       return { ...state, book: INITIAL_STATE.book };
+    case INIT_ALL_BOOKS:
+      return { ...state, all: INITIAL_STATE.all, loaded: false };
     case FETCH_BOOKS:
       return {
         ...state,

@@ -20,10 +20,10 @@ class AuthorsList extends Component {
 
   render() {
     return (
-      <div>
-        <h5>Authors</h5>
+      <ul className="list-group">
+        <li className="list-group-item li__head">Authors</li>
         {this.renderAuthors()}
-      </div>
+      </ul>
     );
   }
 }

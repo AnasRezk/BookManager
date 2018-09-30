@@ -4,14 +4,22 @@ import {
   FETCH_SINGLE_BOOK,
   CREATE_BOOK,
   INIT_BOOK,
-  UPDATE_BOOK
+  UPDATE_BOOK,
+  INIT_ALL_BOOKS
 } from "./book_types";
+import { ApiUrl } from "../utils/config";
 
-const rootUrl = "https://books-json-server.herokuapp.com/books";
+const rootUrl = `${ApiUrl}books`;
 
 export function initBook() {
   return {
     type: INIT_BOOK
+  };
+}
+
+export function initAllBook() {
+  return {
+    type: INIT_ALL_BOOKS
   };
 }
 
