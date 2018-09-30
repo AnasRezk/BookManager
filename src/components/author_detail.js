@@ -1,13 +1,16 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import Loader from "../utils/loader";
 
 export default class AuthorDetail extends Component {
-
   renderEditButton(id) {
     if (this.props.editMode) {
       return (
         <Link to={`/editauthor/${id}`}>
-          <button className="btn btn-primary btn-sm"><i className=""></i>edit</button>
+          <button className="btn btn-primary btn-sm">
+            <i className="" />
+            edit
+          </button>
         </Link>
       );
     }
@@ -15,7 +18,7 @@ export default class AuthorDetail extends Component {
 
   renderAuthor() {
     const { name, jobTitle, bio, id } = this.props.author;
-    if (this.props.author) {
+    if (this.props.author.id) {
       return (
         <div className="card">
           <div className="card-body">
@@ -27,7 +30,7 @@ export default class AuthorDetail extends Component {
         </div>
       );
     } else {
-      return <div>loading...</div>;
+      return <Loader />;
     }
   }
 

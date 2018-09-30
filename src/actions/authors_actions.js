@@ -6,8 +6,9 @@ import {
   UPDATE_AUTHOR,
   INIT_AUTHOR
 } from "./authors_types";
+import { ApiUrl } from "../utils/config";
 
-const rootUrl = "https://books-json-server.herokuapp.com/authors";
+const rootUrl = `${ApiUrl}authors`;
 
 export function initAuthor() {
   return {

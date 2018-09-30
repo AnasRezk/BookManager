@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { fetchSingleCategory } from "../actions/categories_actions";
-import { fetchCategoryBooks, initBook } from "../actions/books_actions";
+import { fetchCategoryBooks, initAllBook } from "../actions/books_actions";
 import BookList from "../components/book_list";
 import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -18,8 +18,10 @@ class AuthorIndex extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.getId() !== prevProps.category.id) {
-      this.props.initBook();
+    const prevId = prevProps.match.params.id;
+    const nextId = this.getId();
+    if (nextId != prevId) {
+      this.props.initAllBook();
       this.props.fetchCategoryBooks(this.getId(), 1, this.props.perPage);
       this.props.fetchSingleCategory(this.getId());
     }
@@ -77,7 +79,7 @@ function mapDispatchToPorops(dispatch) {
     {
       fetchCategoryBooks: fetchCategoryBooks,
       fetchSingleCategory: fetchSingleCategory,
-      initBook: initBook
+      initAllBook: initAllBook
     },
     dispatch
   );

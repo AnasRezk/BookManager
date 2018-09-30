@@ -6,8 +6,9 @@ import {
   UPDATE_CATEGORY,
   INIT_CATEGORY
 } from "./categories_types";
+import { ApiUrl } from "../utils/config";
 
-const rootUrl = "https://books-json-server.herokuapp.com/categories";
+const rootUrl = `${ApiUrl}categories`;
 
 export function initCategory() {
   return {
