@@ -63,53 +63,55 @@ class AuthorManage extends Component {
     const { handleSubmit, pristine, reset, submitting } = this.props; // No fields prop
 
     return (
-      <div>
-        <button onClick={this.goBack} className="btn btn-xs btn-default">
-          Back
-        </button>
-        <h3>Manage Author</h3>
-        <form onSubmit={handleSubmit(this.onFormSubmit)}>
-          <div className="form-group">
-            <label htmlFor="name">Name</label>
-            <Field
-              name="name"
-              component={renderInput}
-              type="text"
-              validate={[required]}
-            />
-          </div>
+      <div className="panel panel-info">
+        <div className="panel-heading">Manage Author</div>
+        <div className="panel-body">
+          <form onSubmit={handleSubmit(this.onFormSubmit)}>
+            <div className="form-group">
+              <label htmlFor="name">Name</label>
+              <Field
+                name="name"
+                component={renderInput}
+                type="text"
+                validate={[required]}
+              />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="jobTitle">Job Title</label>
-            <Field
-              name="jobTitle"
-              component={renderInput}
-              type="text"
-              validate={[required]}
-            />
-          </div>
+            <div className="form-group">
+              <label htmlFor="jobTitle">Job Title</label>
+              <Field
+                name="jobTitle"
+                component={renderInput}
+                type="text"
+                validate={[required]}
+              />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="bio">Bio</label>
-            <Field name="bio" component={renderTextArea} type="text" />
-          </div>
+            <div className="form-group">
+              <label htmlFor="bio">Bio</label>
+              <Field name="bio" component={renderTextArea} type="text" />
+            </div>
 
-          <button
-            className="btn btn-primary"
-            type="submit"
-            disabled={pristine || submitting}
-          >
-            Submit
-          </button>
-          <button
-            className="btn btn-danger"
-            type="button"
-            disabled={pristine || submitting}
-            onClick={reset}
-          >
-            Clear
-          </button>
-        </form>
+            <div className="pull-right">
+              <button
+                className="btn btn-danger"
+                type="button"
+                disabled={pristine || submitting}
+                onClick={reset}
+              >
+                Clear
+              </button>
+
+              <button
+                className="btn btn-primary ml10"
+                type="submit"
+                disabled={pristine || submitting}
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     );
   }

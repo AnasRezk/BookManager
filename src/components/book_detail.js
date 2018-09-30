@@ -46,36 +46,43 @@ class BookDetail extends Component {
       this.props.fetchSingleAuthor(author);
       this.props.fetchSingleCategory(category);
       return (
-        <div className="card">
-          <img
-            src="../../assests/book-flat.png"
-            width="120px"
-            className="card-img-left"
-          />
-          <div className="card-body">
-            <h5 className="card-title">{title}</h5>
-            {this.renderEditButton(id)}
-            <h6 className="card-subtitle mb-2">
-              <strong>By : </strong>
-              {this.props.author.name}
-            </h6>
-            <h6 className="card-subtitle mb-2">
-              <strong>Number of Pages : </strong>
-              {pagesNumber}
-            </h6>
-            <h6 className="card-subtitle mb-2">
-              <strong>Publish Year : </strong>
-              {publishYear}
-            </h6>
-            <h6 className="card-subtitle mb-2">
-              <strong>ISBN : </strong>
-              {isbn}
-            </h6>
-            <h6 className="card-subtitle mb-2">
-              <strong>Classification : </strong>
-              {this.props.category.name ? this.props.category.name : ""}
-            </h6>
-            <p className="card-text">{description}.</p>
+        <div className="panel panel-info">
+          <div className="panel-heading">
+            <strong>Book Card</strong>
+          </div>
+          <div className="panel-body">
+            <div className="card">
+              <img
+                src="../../assests/book-flat.png"
+                width="120px"
+                className="card-img-left"
+              />
+              <div className="card-body">
+                <h5 className="card-title">{title}</h5>
+                {this.renderEditButton(id)}
+                <h6 className="card-subtitle mb-2">
+                  <strong>By : </strong>
+                  {this.props.author.name}
+                </h6>
+                <h6 className="card-subtitle mb-2">
+                  <strong>Number of Pages : </strong>
+                  {pagesNumber}
+                </h6>
+                <h6 className="card-subtitle mb-2">
+                  <strong>Publish Year : </strong>
+                  {publishYear}
+                </h6>
+                <h6 className="card-subtitle mb-2">
+                  <strong>ISBN : </strong>
+                  {isbn}
+                </h6>
+                <h6 className="card-subtitle mb-2">
+                  <strong>Classification : </strong>
+                  {this.props.category.name ? this.props.category.name : ""}
+                </h6>
+                <p className="card-text">{description}.</p>
+              </div>
+            </div>
           </div>
         </div>
       );

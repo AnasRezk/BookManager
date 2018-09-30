@@ -17,6 +17,25 @@
     color: red;
 }
 
+.ml10 {
+    margin-left: 10px;
+}
+
+.active a {
+    color: black;
+}
+
+.li__head {
+    background-color: #81c6e8;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
 /* Start Loader */
 .lds-ring {
     position: relative;
