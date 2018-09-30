@@ -8,19 +8,20 @@ import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 class AuthorIndex extends Component {
-  categoryId = null;
+  getId() {
+    return this.props.match.params.id;
+  }
+
   componentWillMount() {
-    this.categoryId = this.props.match.params.id;
-    this.props.fetchCategoryBooks(this.categoryId, 1, this.props.perPage);
-    this.props.fetchSingleCategory(this.categoryId);
+    this.props.fetchCategoryBooks(this.getId(), 1, this.props.perPage);
+    this.props.fetchSingleCategory(this.getId());
   }
 
   componentDidUpdate(prevProps) {
-    this.categoryId = this.props.match.params.id;
-    if (this.categoryId !== prevProps.category.id) {
+    if (this.getId() !== prevProps.category.id) {
       this.props.initBook();
-      this.props.fetchCategoryBooks(this.categoryId, 1, this.props.perPage);
-      this.props.fetchSingleCategory(this.categoryId);
+      this.props.fetchCategoryBooks(this.getId(), 1, this.props.perPage);
+      this.props.fetchSingleCategory(this.getId());
     }
   }
 
@@ -39,11 +40,7 @@ class AuthorIndex extends Component {
 
   render() {
     const detectPageClicked = offset => {
-      this.props.fetchCategoryBooks(
-        this.categoryId,
-        offset,
-        this.props.perPage
-      );
+      this.props.fetchCategoryBooks(this.getId(), offset, this.props.perPage);
     };
 
     const { id, name } = this.props.category;

@@ -7,7 +7,7 @@ import {
   UPDATE_BOOK
 } from "./book_types";
 
-const rootUrl = "http://localhost:3000/books";
+const rootUrl = "https://books-json-server.herokuapp.com/books";
 
 export function initBook() {
   return {

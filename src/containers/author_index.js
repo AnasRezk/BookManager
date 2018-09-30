@@ -8,25 +8,26 @@ import AuthorDetail from "../components/author_detail";
 import { withRouter } from "react-router-dom";
 
 class AuthorIndex extends Component {
-  authorId = null;
+  getId() {
+    return this.props.match.params.id;
+  }
+
   componentWillMount() {
-    this.authorId = this.props.match.params.id;
-    this.props.fetchAuthorBooks(this.authorId, 1, this.props.perPage);
-    this.props.fetchSingleAuthor(this.authorId);
+    this.props.fetchAuthorBooks(this.getId(), 1, this.props.perPage);
+    this.props.fetchSingleAuthor(this.getId());
   }
 
   componentDidUpdate(prevProps) {
-    this.authorId = this.props.match.params.id;
-    if (this.authorId !== prevProps.author.id) {
+    if (this.getId() !== prevProps.author.id) {
       this.props.initBook();
-      this.props.fetchAuthorBooks(this.authorId, 1, this.props.perPage);
-      this.props.fetchSingleAuthor(this.authorId);
+      this.props.fetchAuthorBooks(this.getId(), 1, this.props.perPage);
+      this.props.fetchSingleAuthor(this.getId());
     }
   }
 
   render() {
     const detectPageClicked = offset => {
-      this.props.fetchBooks(this.authorId, offset, this.props.perPage);
+      this.props.fetchBooks(this.getId(), offset, this.props.perPage);
     };
 
     return (
