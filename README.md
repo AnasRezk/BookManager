@@ -12,3 +12,11 @@ Checkout this repo, install dependencies, then start the gulp process with the f
 > npm install
 > npm start
 ```
+
+### TODO
+- use absolute path instead of relative path
+- add selectors for store
+- use rxjs and redux-observable
+- add lazy load
+- chnage redux-forms to best alternative
+- Add Authorization logic

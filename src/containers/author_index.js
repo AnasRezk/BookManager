@@ -7,13 +7,13 @@ import { fetchAuthorBooks, initAllBook } from '../actions/books_actions';
 import { fetchSingleAuthor, initAuthor } from '../actions/authors_actions';
 import BookList from '../components/book_list';
 import AuthorDetail from '../components/author_detail';
+import store from '../store';
 
 class AuthorIndex extends Component {
     static propTypes = {
         fetchBooks: PropTypes.func,
         match: PropTypes.object,
         fetchAuthorBooks: PropTypes.func.isRequired,
-        fetchSingleAuthor: PropTypes.func.isRequired,
         initAllBook: PropTypes.func.isRequired,
         initAuthor: PropTypes.func.isRequired,
         perPage: PropTypes.number,
@@ -30,7 +30,8 @@ class AuthorIndex extends Component {
 
     componentDidMount() {
         this.props.fetchAuthorBooks(this.getId(), 1, this.props.perPage);
-        this.props.fetchSingleAuthor(this.getId());
+        store.dispatch(fetchSingleAuthor(this.getId()));
+        // this.props.fetchSingleAuthor(this.getId());
     }
 
     componentDidUpdate(prevProps) {
@@ -40,7 +41,8 @@ class AuthorIndex extends Component {
             this.props.initAllBook();
             this.props.initAuthor();
             this.props.fetchAuthorBooks(this.getId(), 1, this.props.perPage);
-            this.props.fetchSingleAuthor(this.getId());
+            // this.props.fetchSingleAuthor(this.getId());
+            store.dispatch(fetchSingleAuthor(this.getId()));
         }
     }
 
@@ -82,7 +84,6 @@ function mapDispatchToPorops(dispatch) {
     return bindActionCreators(
         {
             fetchAuthorBooks,
-            fetchSingleAuthor,
             initAllBook,
             initAuthor
         },

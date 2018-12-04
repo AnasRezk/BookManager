@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import routes from '../routes';
-
 import { Header } from '../components/header';
 import AuthorsList from '../components/authors_list';
 import CategoriesList from '../components/categories_list';
-import { fetchAuthors } from '../actions/authors_actions';
 import { fetchCategories } from '../actions/categories_actions';
 import { setEditMode } from '../actions/layout_actions';
+import store from '../store';
+import * as actions from '../actions/authors_actions';
 
 class App extends Component {
     static propTypes = {
@@ -20,13 +20,12 @@ class App extends Component {
         authorLoaded: PropTypes.bool.isRequired,
         authors: PropTypes.array.isRequired,
         fetchCategories: PropTypes.func.isRequired,
-        fetchAuthors: PropTypes.func.isRequired,
         setEditMode: PropTypes.func.isRequired
     }
 
     componentDidMount() {
         this.props.fetchCategories();
-        this.props.fetchAuthors();
+        store.dispatch(actions.fetchAuthors());
     }
 
     render() {
@@ -74,7 +73,6 @@ function mapDispatchToPorops(dispatch) {
     return bindActionCreators(
         {
             fetchCategories,
-            fetchAuthors,
             setEditMode
         },
         dispatch

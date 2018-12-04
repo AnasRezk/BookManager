@@ -1,9 +1,10 @@
 import {
-    FETCH_AUTHORS,
-    FETCH_SINGLE_AUTHOR,
+    FETCH_AUTHORS_SUCCESS,
     CREATE_AUTHOR,
     UPDATE_AUTHOR,
-    INIT_AUTHOR
+    INIT_AUTHOR,
+    FETCH_AUTHORS_FAIL,
+    FETCH_SINGLE_AUTHOR_SUCCESS
 } from '../actions/authors_types';
 
 const INITIAL_STATE = {
@@ -14,17 +15,20 @@ const INITIAL_STATE = {
         name: '',
         jobTitle: '',
         bio: ''
-    }
+    },
+    error: null
 };
 
 export default function(state = INITIAL_STATE, action) {
     switch (action.type) {
         case INIT_AUTHOR:
             return { ...state, author: INITIAL_STATE.author };
-        case FETCH_AUTHORS:
-            return { ...state, loaded: true, all: action.payload.data };
-        case FETCH_SINGLE_AUTHOR:
-            return { ...state, author: action.payload.data };
+        case FETCH_AUTHORS_SUCCESS:
+            return { ...state, loaded: true, all: action.payload ? action.payload : [] };
+        case FETCH_AUTHORS_FAIL:
+            return { ...state, loaded: true, error: action.payload };
+        case FETCH_SINGLE_AUTHOR_SUCCESS:
+            return { ...state, author: action.payload };
         case CREATE_AUTHOR:
             return {
                 ...state,
