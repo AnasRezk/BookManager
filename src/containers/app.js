@@ -1,78 +1,87 @@
-import React, { Component } from "react";
-import routes from "../routes";
-import { BrowserRouter as Router } from "react-router-dom";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import React, { Component } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import routes from '../routes';
 
-import { Header } from "../components/header";
-import AuthorsList from "../components/authors_list";
-import CategoriesList from "../components/categories_list";
-import { fetchAuthors } from "../actions/authors_actions";
-import { fetchCategories } from "../actions/categories_actions";
-import { setEditMode } from "../actions/layout_actions";
+import { Header } from '../components/header';
+import AuthorsList from '../components/authors_list';
+import CategoriesList from '../components/categories_list';
+import { fetchAuthors } from '../actions/authors_actions';
+import { fetchCategories } from '../actions/categories_actions';
+import { setEditMode } from '../actions/layout_actions';
 
 class App extends Component {
-  componentWillMount() {
-    this.props.fetchCategories();
-    this.props.fetchAuthors();
-  }
+    static propTypes = {
+        layout: PropTypes.object.isRequired,
+        categoryLoaded: PropTypes.bool,
+        categories: PropTypes.array.isRequired,
+        authorLoaded: PropTypes.bool.isRequired,
+        authors: PropTypes.array.isRequired,
+        fetchCategories: PropTypes.func.isRequired,
+        fetchAuthors: PropTypes.func.isRequired,
+        setEditMode: PropTypes.func.isRequired
+    }
 
-  render() {
-    const detectEditChange = () => {
-      this.props.layout.editMode
-        ? this.props.setEditMode(false)
-        : this.props.setEditMode(true);
-    };
+    componentDidMount() {
+        this.props.fetchCategories();
+        this.props.fetchAuthors();
+    }
 
-    return (
-      <Router>
-        <div>
-          <Header
-            onEditButtonClicked={detectEditChange}
-            editMode={this.props.layout.editMode}
-          />
+    render() {
+        const detectEditChange = () => {
+            this.props.layout.editMode ?
+                this.props.setEditMode(false) :
+                this.props.setEditMode(true);
+        };
 
-          <div className="row">
-            <div className="col-md-3">
-              <CategoriesList
-                loaded={this.props.categoryLoaded}
-                categories={this.props.categories}
-              />
-              <AuthorsList
-                loaded={this.props.authorLoaded}
-                authors={this.props.authors}
-              />
-            </div>
-            <div className="col-md-9">{routes}</div>
-          </div>
-        </div>
-      </Router>
-    );
-  }
+        return (
+            <Router>
+                <div>
+                    <Header
+                    onEditButtonClicked={detectEditChange}
+                    editMode={this.props.layout.editMode} />
+
+                    <div className="row">
+                        <div className="col-md-3">
+                            <CategoriesList
+                            loaded={this.props.categoryLoaded}
+                            categories={this.props.categories} />
+                            <AuthorsList
+                            loaded={this.props.authorLoaded}
+                            authors={this.props.authors} />
+                        </div>
+                        <div className="col-md-9">{routes}</div>
+                    </div>
+                </div>
+            </Router>
+        );
+    }
 }
 
 function mapStateToProps(state) {
-  return {
-    categories: state.categories.all,
-    authors: state.authors.all,
-    authorLoaded: state.authors.loaded,
-    categoryLoaded: state.categories.loaded,
-    layout: state.layout
-  };
+    return {
+        categories: state.categories.all,
+        authors: state.authors.all,
+        authorLoaded: state.authors.loaded,
+        categoryLoaded: state.categories.loaded,
+        layout: state.layout
+    };
 }
 
 function mapDispatchToPorops(dispatch) {
-  return bindActionCreators(
-    {
-      fetchCategories: fetchCategories,
-      fetchAuthors: fetchAuthors,
-      setEditMode: setEditMode
-    },
-    dispatch
-  );
+    return bindActionCreators(
+        {
+            fetchCategories,
+            fetchAuthors,
+            setEditMode
+        },
+        dispatch
+    );
 }
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToPorops
+    mapStateToProps,
+    mapDispatchToPorops
 )(App);

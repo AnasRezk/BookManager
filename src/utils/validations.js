@@ -1,2 +1,3 @@
-export const required = value =>
-  value || typeof value === "number" ? undefined : "Required";
+export const required = value => {
+    return value || typeof value === 'number' ? null : 'Required';
+};

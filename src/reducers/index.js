@@ -6,11 +6,11 @@ import CategoriesReducer from './reducer_categories';
 import LayoutReducer from './reducer_layout';
 
 const rootReducer = combineReducers({
-  books: booksReducer,
-  authors: AuthorsReducer,
-  categories: CategoriesReducer,
-  form: formReducer,
-  layout: LayoutReducer
+    books: booksReducer,
+    authors: AuthorsReducer,
+    categories: CategoriesReducer,
+    form: formReducer,
+    layout: LayoutReducer
 });
 
 export default rootReducer;

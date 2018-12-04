@@ -1,0 +1,7 @@
+dist/**/*.js
+server/dist/**/*.js
+flow-typed/**/*.js
+!.eslintrc.js
+/**/node_modules
+src/jobseeker-signup
+assests/

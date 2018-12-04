@@ -16,14 +16,14 @@ export default (
     <Switch>
         <Route exact path="/" component={BooksIndex} />
         <Route path="/anas" render={() => (<h1>Anas</h1>)} />
-        <Route path={`/book/:id`} component={BookDetail} />
-        <Route path={`/newbook`} component={BookManage} />
-        <Route path={`/editbook/:id`} component={BookManage} />
-        <Route path={`/author/:id`} component={AuthorIndex} />
-        <Route path={`/newauthor`} component={AuthorManage} />
-        <Route path={`/editauthor/:id`} component={AuthorManage} />
-        <Route path={`/newcategory`} component={CategoryManage} />
-        <Route path={`/editcategory/:id`} component={CategoryManage} />
-        <Route path={`/category/:id`} component={CategoriesIndex} />
+        <Route path={'/book/:id'} component={BookDetail} />
+        <Route path={'/newbook'} component={BookManage} />
+        <Route path={'/editbook/:id'} component={BookManage} />
+        <Route path={'/author/:id'} component={AuthorIndex} />
+        <Route path={'/newauthor'} component={AuthorManage} />
+        <Route path={'/editauthor/:id'} component={AuthorManage} />
+        <Route path={'/newcategory'} component={CategoryManage} />
+        <Route path={'/editcategory/:id'} component={CategoryManage} />
+        <Route path={'/category/:id'} component={CategoriesIndex} />
     </Switch>
 );
