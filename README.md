@@ -9,8 +9,8 @@ Checkout this repo, install dependencies, then start the gulp process with the f
 ```
 > git clone https://github.com/AnasRezk/BookManager.git
 > cd BookManager
-> npm install
-> npm start
+> yarn
+> yarn start
 ```
 
 ### TODO
